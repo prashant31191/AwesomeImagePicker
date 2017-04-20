@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--for the crop image-->
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
     </application>
 
 </manifest>

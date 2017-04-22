@@ -51,6 +51,7 @@ dependencies {
 
 
 
+
     compile project(path: ':awesomeimagepicker')
     testCompile 'junit:junit:4.12'
 

@@ -49,6 +49,7 @@ public class GravSampleFragment extends Fragment {
   @Override
   public void onPause() {
     super.onPause();
+    if(gravView !=null)
     gravView.stop();
   }
 }

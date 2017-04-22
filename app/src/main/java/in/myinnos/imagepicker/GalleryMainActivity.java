@@ -32,6 +32,10 @@ import in.myinnos.awesomeimagepicker.activities.AlbumSelectActivity;
 import in.myinnos.awesomeimagepicker.helpers.ConstantsCustomGallery;
 import in.myinnos.awesomeimagepicker.models.Image;
 import in.myinnos.imagepicker.gallery.ItemTouchHelperViewHolder;
+import in.myinnos.imagepicker.utils.RotateZoomImageView;
+import in.myinnos.imagepicker.utils.StickerImageView;
+import in.myinnos.imagepicker.utils.StickerView;
+import in.myinnos.imagepicker.utils.TouchImageView;
 
 
 public class GalleryMainActivity extends Activity {
@@ -505,6 +509,7 @@ public class GalleryMainActivity extends Activity {
 
             View itemView = mLayoutInflater.inflate(R.layout.gallery_pager_item, container, false);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            StickerImageView ivCenterMain = (StickerImageView) itemView.findViewById(R.id.ivCenterMain);
 
             final Uri uri = Uri.fromFile(new File(mItems.get(position).path));
 
@@ -514,6 +519,18 @@ public class GalleryMainActivity extends Activity {
                     .crossFade()
                     //  .centerCrop()
                     .into(imageView);
+
+           /* Glide.with(mContext).load(uri)
+                    .placeholder(R.drawable.image_selector)
+                    //.override(400, 400)
+                   // .crossFade()
+                    //  .centerCrop()
+                    .into(ivCenterMain);*/
+
+
+// add a stickerImage to canvas
+           // StickerImageView iv_sticker = new StickerImageView(mContext);
+            ivCenterMain.setImageUri(mContext,uri);
 
             container.addView(itemView);
 

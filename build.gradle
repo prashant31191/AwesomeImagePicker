@@ -3,6 +3,11 @@
 buildscript {
     repositories {
         jcenter()
+
+        // for the animatino
+        maven {
+            url "http://dl.bintray.com/glomadrian/maven"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'

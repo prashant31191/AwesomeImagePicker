@@ -8,4 +8,6 @@
     <color name="multiple_image_select_albumTextBackground">@color/colorPrimary</color>
     <color name="multiple_image_select_imageSelectBackground">#000000</color>
 
+    <color name="clrLibTrBlack">#99000000</color>
+
 </resources>

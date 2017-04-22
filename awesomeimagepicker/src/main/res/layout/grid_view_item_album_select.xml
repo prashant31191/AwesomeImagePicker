@@ -22,9 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/multiple_image_select_albumTextBackground"
+        android:background="@color/clrLibTrBlack"
         android:gravity="center"
         android:lines="1"
+
         android:padding="4dp"
         android:textColor="@color/multiple_image_select_primary"
         android:textSize="12sp" />

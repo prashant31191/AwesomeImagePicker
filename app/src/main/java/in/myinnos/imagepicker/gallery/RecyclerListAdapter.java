@@ -16,9 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import in.myinnos.awesomeimagepicker.models.Image;
 import in.myinnos.imagepicker.R;
@@ -44,7 +42,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallery_item_main, parent, false);
         ItemViewHolder itemViewHolder = new ItemViewHolder(view);
         return itemViewHolder;
     }

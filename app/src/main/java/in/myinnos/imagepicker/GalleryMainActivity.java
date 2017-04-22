@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,9 +20,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -29,15 +27,14 @@ import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import in.myinnos.awesomeimagepicker.activities.AlbumSelectActivity;
 import in.myinnos.awesomeimagepicker.helpers.ConstantsCustomGallery;
-import in.myinnos.awesomeimagepicker.helpers.OnSwipeTouchListener;
 import in.myinnos.awesomeimagepicker.models.Image;
 import in.myinnos.imagepicker.gallery.ItemTouchHelperViewHolder;
 
-public class MainActivity extends Activity {
+
+public class GalleryMainActivity extends Activity {
 
     private static final int READ_STORAGE_PERMISSION = 4000;
     private int LIMIT = 5;
@@ -59,8 +56,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.gallery_activity_main);
 
         rvImageList = (RecyclerView) findViewById(R.id.rvImageList);
         ivBack = (ImageView) findViewById(R.id.ivBack);
@@ -82,7 +79,7 @@ public class MainActivity extends Activity {
 
 
 /*
-        imageView.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+        imageView.setOnTouchListener(new OnSwipeTouchListener(GravMainActivity.this) {
             public void onSwipeTop() {
                // Toast.makeText(MyActivity.this, "top", Toast.LENGTH_SHORT).show();
             }
@@ -97,10 +94,10 @@ public class MainActivity extends Activity {
                     else {
                         selPosition = selPosition - 1;
                     }
-                    Uri uri = Uri.fromFile(new File(arrayListImages.get(selPosition).path));
+                    Uri uri = Uri.fromFile(new File(arrayListImages.get(selPosition).grav_path));
 
                     inputUri = uri;
-                    Glide.with(MainActivity.this).load(uri)
+                    Glide.with(GravMainActivity.this).load(uri)
                             .placeholder(R.drawable.image_selector)
                             .override(400, 400)
                             .crossFade()
@@ -123,10 +120,10 @@ public class MainActivity extends Activity {
                         selPosition = selPosition + 1;
                     }
 
-                    Uri uri = Uri.fromFile(new File(arrayListImages.get(selPosition).path));
+                    Uri uri = Uri.fromFile(new File(arrayListImages.get(selPosition).grav_path));
 
                     inputUri = uri;
-                    Glide.with(MainActivity.this).load(uri)
+                    Glide.with(GravMainActivity.this).load(uri)
                             .placeholder(R.drawable.image_selector)
                             .override(400, 400)
                             .crossFade()
@@ -151,7 +148,7 @@ public class MainActivity extends Activity {
 
                 if(arrayListImages !=null && arrayListImages.size() >= 5)
                 {
-                    Toast.makeText(MainActivity.this,"Please remove first already 5 images added",Toast.LENGTH_LONG).show();
+                    Toast.makeText(GalleryMainActivity.this,"Please remove first already 5 images added",Toast.LENGTH_LONG).show();
                 }
                 else {
 
@@ -163,16 +160,16 @@ public class MainActivity extends Activity {
 
                     //isAddClick = true;
                     if (Build.VERSION.SDK_INT >= 23) {
-                        if (!Helper.checkPermissionForExternalStorage(MainActivity.this)) {
-                            Helper.requestStoragePermission(MainActivity.this, READ_STORAGE_PERMISSION);
+                        if (!Helper.checkPermissionForExternalStorage(GalleryMainActivity.this)) {
+                            Helper.requestStoragePermission(GalleryMainActivity.this, READ_STORAGE_PERMISSION);
                         } else {
                             // opining custom gallery
-                            Intent intent = new Intent(MainActivity.this, AlbumSelectActivity.class);
+                            Intent intent = new Intent(GalleryMainActivity.this, AlbumSelectActivity.class);
                             intent.putExtra(ConstantsCustomGallery.INTENT_EXTRA_LIMIT, LIMIT);
                             startActivityForResult(intent, ConstantsCustomGallery.REQUEST_CODE);
                         }
                     } else {
-                        Intent intent = new Intent(MainActivity.this, AlbumSelectActivity.class);
+                        Intent intent = new Intent(GalleryMainActivity.this, AlbumSelectActivity.class);
                         intent.putExtra(ConstantsCustomGallery.INTENT_EXTRA_LIMIT, LIMIT);
                         startActivityForResult(intent, ConstantsCustomGallery.REQUEST_CODE);
                     }
@@ -184,8 +181,8 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 if (inputUri != null) {
                     outputUri = inputUri;
-                    //Crop.of(inputUri, outputUri).asSquare().start(MainActivity.this);
-                    Crop.of(inputUri, outputUri).start(MainActivity.this);
+                    //Crop.of(inputUri, outputUri).asSquare().start(GravMainActivity.this);
+                    Crop.of(inputUri, outputUri).start(GalleryMainActivity.this);
                 }
             }
         });
@@ -241,7 +238,7 @@ public class MainActivity extends Activity {
                     clickImage = true;
                     selPosition = position;
                     recyclerListAdapter.notifyDataSetChanged();
-                    //recyclerListAdapter = new RecyclerListAdapter(MainActivity.this, arrayListImages);
+                    //recyclerListAdapter = new RecyclerListAdapter(GravMainActivity.this, arrayListImages);
                     //rvImageList.setAdapter(recyclerListAdapter);
             }
 
@@ -357,7 +354,7 @@ public class MainActivity extends Activity {
 
         @Override
         public RecyclerListAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallery_item_main, parent, false);
             RecyclerListAdapter.ItemViewHolder itemViewHolder = new RecyclerListAdapter.ItemViewHolder(view);
             return itemViewHolder;
         }
@@ -506,7 +503,7 @@ public class MainActivity extends Activity {
         public Object instantiateItem(ViewGroup container, int position) {
             //selPosition = position +1;
 
-            View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
+            View itemView = mLayoutInflater.inflate(R.layout.gallery_pager_item, container, false);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
 
             final Uri uri = Uri.fromFile(new File(mItems.get(position).path));
@@ -519,6 +516,9 @@ public class MainActivity extends Activity {
                     .into(imageView);
 
             container.addView(itemView);
+
+
+
 
 
             return itemView;
@@ -564,7 +564,7 @@ public class MainActivity extends Activity {
 
         @Override
         public in.myinnos.imagepicker.gallery.RecyclerListAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallery_item_main, parent, false);
             in.myinnos.imagepicker.gallery.RecyclerListAdapter.ItemViewHolder itemViewHolder = new in.myinnos.imagepicker.gallery.RecyclerListAdapter.ItemViewHolder(view);
             return itemViewHolder;
         }
@@ -573,7 +573,7 @@ public class MainActivity extends Activity {
         public void onBindViewHolder(final in.myinnos.imagepicker.gallery.RecyclerListAdapter.ItemViewHolder holder, int position) {
             holder.textView.setText(mItems.get(position).name);
 
-          final  Uri uri = Uri.fromFile(new File(mItems.get(position).path));
+          final  Uri uri = Uri.fromFile(new File(mItems.get(position).grav_path));
 
             Glide.with(mContext).load(uri)
                     .placeholder(R.drawable.image_selector)

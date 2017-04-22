@@ -74,6 +74,11 @@ public class ImageSelectActivity extends HelperActivity {
         }
         album = intent.getStringExtra(ConstantsCustomGallery.INTENT_EXTRA_ALBUM);
 
+        if(album !=null && album.length() > 0)
+        {
+            tvProfile.setText(album);
+        }
+
         errorDisplay = (TextView) findViewById(R.id.text_view_error);
         errorDisplay.setVisibility(View.INVISIBLE);
 
